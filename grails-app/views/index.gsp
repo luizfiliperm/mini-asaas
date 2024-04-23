@@ -100,7 +100,7 @@
                 cellphoneInput.value += ') '
             }
 
-            if(inputLength === 9) {
+            if(inputLength === 10) {
                 cellphoneInput.value += '-'
             }
         })
