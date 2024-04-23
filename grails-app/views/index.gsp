@@ -20,6 +20,10 @@
         <label><input type="submit" value="Enviar"></label>
     </form>
 
+    <g:if test="${params.message}">
+        <h2>${params.message}</h2>
+    </g:if>
+
     <script>
         const cpfInput = document.getElementById('cpf')
         const cellphoneInput = document.getElementById('cellphone')

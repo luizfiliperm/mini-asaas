@@ -12,6 +12,6 @@ class IndexController {
         } else {
             println "No params"
         }
-        redirect(uri: "/")
+        redirect(uri: "/", params: [message: "Cadastro realizado com Sucesso"])
     }
 }
