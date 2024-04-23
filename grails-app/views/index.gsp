@@ -54,17 +54,17 @@
         <h1>Registro de Cliente</h1>
         <form action="${createLink(controller: 'index', action: 'processForm')}" method="POST">
             <h2>Informações</h2>
-            <label><input type="text" name="name" placeholder="Nome"></label><br>
-            <label><input type="text" name="cpf" id="cpf" placeholder="CPF" maxlength="15" autocomplete="off"></label><br>
-            <label><input type="text" name="cellphone" id="cellphone" placeholder="Telefone" maxlength="15" autocomplete="off"></label><br>
+            <label><input type="text" name="name" placeholder="Nome" autocomplete="off" required></label><br>
+            <label><input type="text" name="cpf" id="cpf" placeholder="CPF" maxlength="14" autocomplete="off" required></label><br>
+            <label><input type="text" name="cellphone" id="cellphone" placeholder="Telefone" maxlength="15" autocomplete="off" required></label><br>
             <h2>Endereço</h2>
-            <label><input type="text" name="cep" id="cep" placeholder="CEP" maxlength="10" autocomplete="off"></label><br>
-            <label><input type="text" name="state" placeholder="Estado"></label><br>
-            <label><input type="text" name="city" placeholder="Cidade"></label><br>
-            <label><input type="text" name="district" placeholder="Bairro"></label><br>
-            <label><input type="text" name="street" placeholder="Rua"></label><br>
-            <label><input type="text" name="number" placeholder="Número"></label><br>
-            <label><input type="text" name="complement" placeholder="Complemento"></label><br>
+            <label><input type="text" name="cep" id="cep" placeholder="CEP" maxlength="10" autocomplete="off" required></label><br>
+            <label><input type="text" name="state" placeholder="Estado" autocomplete="off" required></label><br>
+            <label><input type="text" name="city" placeholder="Cidade" autocomplete="off" required></label><br>
+            <label><input type="text" name="district" placeholder="Bairro" autocomplete="off" required></label><br>
+            <label><input type="text" name="street" placeholder="Rua" autocomplete="off" required></label><br>
+            <label><input type="text" name="number" placeholder="Número" autocomplete="off" required></label><br>
+            <label><input type="text" name="complement" placeholder="Complemento" autocomplete="off"></label><br>
             <label><input type="submit" id="button" value="Enviar"></label>
         </form>
 
