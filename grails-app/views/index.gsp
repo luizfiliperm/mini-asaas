@@ -66,6 +66,35 @@
 
         })
 
+        cepInput.addEventListener('blur', () => {
+            let cep = cepInput.value.replace(/\D/g, '')
+
+            if(cep.length !== 8){
+                alert("CEP Inválido")
+                return
+            }
+
+            fillCepInfo(cep)
+        })
+
+        function fillCepInfo(cep){
+            const url = 'https://viacep.com.br/ws/' + cep + "/json/"
+
+            fetch(url)
+                .then(response =>{
+                    return response.json()
+                })
+                .then(data => {
+                    if(data.erro){
+                        alert("CEP Inválido")
+                        return
+                    }
+                    document.querySelector('input[name=state]').value = data.uf
+                    document.querySelector('input[name=city]').value = data.localidade
+                    document.querySelector('input[name=district]').value = data.bairro
+                    document.querySelector('input[name=street]').value = data.logradouro
+                })
+        }
     </script>
 </body>
 </html>
