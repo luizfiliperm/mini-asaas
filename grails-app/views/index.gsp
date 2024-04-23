@@ -2,28 +2,76 @@
 <html>
 <head>
     <title>Registro de Cliente</title>
+    <style>
+        #form{
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #b2c3f3;
+            text-align: center;
+            width: 90%;
+        }
+
+        input{
+            margin: 5px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 95%;
+        }
+
+        input#button {
+            background-color: #b4d88d;
+            color: white;
+            width: auto;
+            border-radius: 5px;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        input#button:hover{
+            background-color: #a3c77f;
+        }
+
+        @media only screen and (min-width: 650px) {
+            #form {
+                width: 70%;
+            }
+
+            input {
+                width: 400px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <form action="${createLink(controller: 'index', action: 'processForm')}" method="POST">
-        <h3>Informação</h3>
-        <label><input type="text" name="name" placeholder="Nome"></label><br>
-        <label><input type="text" name="cpf" id="cpf" placeholder="CPF" maxlength="15" autocomplete="off"></label><br>
-        <label><input type="text" name="cellphone" id="cellphone" placeholder="Telefone" maxlength="15" autocomplete="off"></label><br>
-        <h3>Endereço</h3>
-        <label><input type="text" name="cep" id="cep" placeholder="CEP" maxlength="10" autocomplete="off"></label><br>
-        <label><input type="text" name="state" placeholder="Estado"></label><br>
-        <label><input type="text" name="city" placeholder="Cidade"></label><br>
-        <label><input type="text" name="district" placeholder="Bairro"></label><br>
-        <label><input type="text" name="street" placeholder="Rua"></label><br>
-        <label><input type="text" name="number" placeholder="Número"></label><br>
-        <label><input type="text" name="complement" placeholder="Complemento"></label><br>
-        <label><input type="submit" value="Enviar"></label>
-    </form>
+    <div id="form">
+        <h1>Registro de Cliente</h1>
+        <form action="${createLink(controller: 'index', action: 'processForm')}" method="POST">
+            <h2>Informações</h2>
+            <label><input type="text" name="name" placeholder="Nome"></label><br>
+            <label><input type="text" name="cpf" id="cpf" placeholder="CPF" maxlength="15" autocomplete="off"></label><br>
+            <label><input type="text" name="cellphone" id="cellphone" placeholder="Telefone" maxlength="15" autocomplete="off"></label><br>
+            <h2>Endereço</h2>
+            <label><input type="text" name="cep" id="cep" placeholder="CEP" maxlength="10" autocomplete="off"></label><br>
+            <label><input type="text" name="state" placeholder="Estado"></label><br>
+            <label><input type="text" name="city" placeholder="Cidade"></label><br>
+            <label><input type="text" name="district" placeholder="Bairro"></label><br>
+            <label><input type="text" name="street" placeholder="Rua"></label><br>
+            <label><input type="text" name="number" placeholder="Número"></label><br>
+            <label><input type="text" name="complement" placeholder="Complemento"></label><br>
+            <label><input type="submit" id="button" value="Enviar"></label>
+        </form>
 
-    <g:if test="${params.message}">
-        <h2>${params.message}</h2>
-    </g:if>
-
+        <g:if test="${params.message}">
+            <h2>${params.message}</h2>
+        </g:if>
+    </div>
     <script>
         const cpfInput = document.getElementById('cpf')
         const cellphoneInput = document.getElementById('cellphone')
