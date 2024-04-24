@@ -1,77 +1,152 @@
 <!doctype html>
 <html>
 <head>
-    <meta name="layout" content="main"/>
-    <title>Welcome to Grails</title>
+    <title>Registro de Cliente</title>
+    <style>
+        #form{
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #b2c3f3;
+            text-align: center;
+            width: 90%;
+        }
+
+        input{
+            margin: 5px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 95%;
+        }
+
+        input#button {
+            background-color: #b4d88d;
+            color: white;
+            width: auto;
+            border-radius: 5px;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        input#button:hover{
+            background-color: #a3c77f;
+        }
+
+        @media only screen and (min-width: 650px) {
+            #form {
+                width: 70%;
+            }
+
+            input {
+                width: 400px;
+            }
+        }
+    </style>
 </head>
 <body>
-<content tag="nav">
-    <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Application Status <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-            <li class="dropdown-item"><a href="#">Environment: ${grails.util.Environment.current.name}</a></li>
-            <li class="dropdown-item"><a href="#">App profile: ${grailsApplication.config.grails?.profile}</a></li>
-            <li class="dropdown-item"><a href="#">App version:
-                <g:meta name="info.app.version"/></a>
-            </li>
-            <li role="separator" class="dropdown-divider"></li>
-            <li class="dropdown-item"><a href="#">Grails version:
-                <g:meta name="info.app.grailsVersion"/></a>
-            </li>
-            <li class="dropdown-item"><a href="#">Groovy version: ${GroovySystem.getVersion()}</a></li>
-            <li class="dropdown-item"><a href="#">JVM version: ${System.getProperty('java.version')}</a></li>
-            <li role="separator" class="dropdown-divider"></li>
-            <li class="dropdown-item"><a href="#">Reloading active: ${grails.util.Environment.reloadingAgentEnabled}</a></li>
-        </ul>
-    </li>
-    <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Artefacts <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-            <li class="dropdown-item"><a href="#">Controllers: ${grailsApplication.controllerClasses.size()}</a></li>
-            <li class="dropdown-item"><a href="#">Domains: ${grailsApplication.domainClasses.size()}</a></li>
-            <li class="dropdown-item"><a href="#">Services: ${grailsApplication.serviceClasses.size()}</a></li>
-            <li class="dropdown-item"><a href="#">Tag Libraries: ${grailsApplication.tagLibClasses.size()}</a></li>
-        </ul>
-    </li>
-    <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Installed Plugins <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-            <g:each var="plugin" in="${applicationContext.getBean('pluginManager').allPlugins}">
-                <li class="dropdown-item"><a href="#">${plugin.name} - ${plugin.version}</a></li>
-            </g:each>
-        </ul>
-    </li>
-</content>
+    <div id="form">
+        <h1>Registro de Cliente</h1>
+        <form action="${createLink(controller: 'index', action: 'processForm')}" method="POST">
+            <h2>Informações</h2>
+            <label><input type="text" name="name" placeholder="Nome" autocomplete="off" required></label><br>
+            <label><input type="text" name="cpf" id="cpf" placeholder="CPF" maxlength="14" autocomplete="off" required></label><br>
+            <label><input type="text" name="cellphone" id="cellphone" placeholder="Telefone" maxlength="15" autocomplete="off" required></label><br>
+            <h2>Endereço</h2>
+            <label><input type="text" name="cep" id="cep" placeholder="CEP" maxlength="10" autocomplete="off" required></label><br>
+            <label><input type="text" name="state" placeholder="Estado" autocomplete="off" required></label><br>
+            <label><input type="text" name="city" placeholder="Cidade" autocomplete="off" required></label><br>
+            <label><input type="text" name="district" placeholder="Bairro" autocomplete="off" required></label><br>
+            <label><input type="text" name="street" placeholder="Rua" autocomplete="off" required></label><br>
+            <label><input type="text" name="number" placeholder="Número" autocomplete="off" required></label><br>
+            <label><input type="text" name="complement" placeholder="Complemento" autocomplete="off"></label><br>
+            <label><input type="submit" id="button" value="Enviar"></label>
+        </form>
 
-<div class="svg" role="presentation">
-    <div class="grails-logo-container">
-        <asset:image src="grails-cupsonly-logo-white.svg" class="grails-logo"/>
+        <g:if test="${params.message}">
+            <h2>${params.message}</h2>
+        </g:if>
     </div>
-</div>
+    <script>
+        const cpfInput = document.getElementById('cpf')
+        const cellphoneInput = document.getElementById('cellphone')
+        const cepInput = document.getElementById('cep')
 
-<div id="content" role="main">
-    <section class="row colset-2-its">
-        <h1>Welcome to Grails</h1>
+        cpfInput.addEventListener('keypress', () => {
+            let inputLength = cpfInput.value.length
 
-        <p>
-            Congratulations, you have successfully started your first Grails application! At the moment
-            this is the default page, feel free to modify it to either redirect to a controller or display
-            whatever content you may choose. Below is a list of controllers that are currently deployed in
-            this application, click on each to execute its default action:
-        </p>
+            if(inputLength === 3 || inputLength === 7) {
+                cpfInput.value += '.'
+            }
 
-        <div id="controllers" role="navigation">
-            <h2>Available Controllers:</h2>
-            <ul>
-                <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
-                    <li class="controller">
-                        <g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link>
-                    </li>
-                </g:each>
-            </ul>
-        </div>
-    </section>
-</div>
+            if(inputLength === 11) {
+                cpfInput.value += '-'
+            }
+        })
 
+        cellphoneInput.addEventListener('keypress', () =>{
+            let inputLength = cellphoneInput.value.length
+
+            if(inputLength === 0) {
+                cellphoneInput.value += '('
+            }
+
+            if(inputLength === 3) {
+                cellphoneInput.value += ') '
+            }
+
+            if(inputLength === 10) {
+                cellphoneInput.value += '-'
+            }
+        })
+
+        cepInput.addEventListener('keypress', ()=>{
+            let inputLength = cepInput.value.length
+
+            if(inputLength === 2) {
+                cepInput.value += '.'
+            }
+
+            if(inputLength === 6) {
+                cepInput.value += '-'
+            }
+
+        })
+
+        cepInput.addEventListener('blur', () => {
+            let cep = cepInput.value.replace(/\D/g, '')
+
+            if(cep.length !== 8){
+                alert("CEP Inválido")
+                return
+            }
+
+            fillCepInfo(cep)
+        })
+
+        function fillCepInfo(cep){
+            const url = 'https://viacep.com.br/ws/' + cep + "/json/"
+
+            fetch(url)
+                .then(response =>{
+                    return response.json()
+                })
+                .then(data => {
+                    if(data.erro){
+                        alert("CEP Inválido")
+                        return
+                    }
+                    document.querySelector('input[name=state]').value = data.uf
+                    document.querySelector('input[name=city]').value = data.localidade
+                    document.querySelector('input[name=district]').value = data.bairro
+                    document.querySelector('input[name=street]').value = data.logradouro
+                })
+        }
+    </script>
 </body>
 </html>
